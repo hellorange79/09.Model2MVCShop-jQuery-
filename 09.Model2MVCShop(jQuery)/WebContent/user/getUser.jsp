@@ -45,7 +45,7 @@
 		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left:10px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td width="93%" class="ct_ttl01">회원정보조회</td>
+					<td width="93%" class="ct_ttl01">개인정보조회</td>
 					<td width="20%" align="right">&nbsp;</td>
 				</tr>
 			</table>
