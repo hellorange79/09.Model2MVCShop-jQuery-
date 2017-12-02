@@ -8,9 +8,9 @@
 <title>상품등록</title>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
-
-<script type="text/javascript" src="../javascript/calendar.js"></script>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../javascript/calendar.js"></script>
+
 
 <script type="text/javascript">
 
@@ -22,7 +22,7 @@ function fncAddProduct(){
 	var price = document.detailForm.price.value; */
 
 	var name =$("input[name='prodName']").val();
-	var datail =$("input[name='prodDetail']").val();
+	var detail =$("input[name='prodDetail']").val();
 	var manuDate =$("input[name='manuDate']").val();
 	var price =$("input[name='price']").val(); 
 	
@@ -45,8 +45,8 @@ function fncAddProduct(){
 
 	//document.detailForm.action='/product/addProduct';
 	//document.detailForm.submit();
-	$("form").attr("method","POST").attr("action", "/product/addProduct").submit();
 	
+	$("form").attr("method" , "POST").attr("action" , "/product/addProduct").submit();
 	
 }
 
@@ -56,6 +56,7 @@ function fncAddProduct(){
  */
 $(function() {
 	$("td.ct_btn01:contains('등록')").on("click", function(){
+		
 		fncAddProduct();
 		
 	});

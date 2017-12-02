@@ -1,16 +1,36 @@
-<%@page import="com.model2.mvc.service.domain.*"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- ProductVO productVO =(ProductVO)request.getAttribute("productVO"); --%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page pageEncoding="EUC-KR"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html >
 <html>
+
 <head>
+<meta charset="EUC-KR">
 <title>상품등록</title>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
+	$(function () {
+		
+		
+		$(".ct_btn01:contains('확인')").on("click", function () {
+			
+			$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=manage");
+			
+		});
+		
+		 $(".ct_btn01:contains('추가등록')" ).on("click" , function() {
+				
+			 self.location ="../product/addProductView.jsp"
+			});
+		 
+	});
+
+</script>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
@@ -93,7 +113,7 @@
 		<img src="/images/uploadFiles/../../images/empty.GIF">
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
+		<td class="ct_write01">${product.fileName}
 			<!-- 테이블 시작 -->
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
@@ -119,7 +139,7 @@
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<a href="../product/listProduct/menu=manage">확인</a>
+						확인<!-- <a href="../product/listProduct/menu=manage">확인</a> -->
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
@@ -128,7 +148,7 @@
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<a href="../product/addProductView.jsp;">추가등록</a>
+						추가등록<!-- <a href="../product/addProductView.jsp;">추가등록</a> -->
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
