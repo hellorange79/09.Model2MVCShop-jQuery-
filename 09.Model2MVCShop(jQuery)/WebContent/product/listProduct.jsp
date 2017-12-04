@@ -21,12 +21,12 @@ function fncGetUserList(currentPage) {
 	
 	$("#currentPage").val(currentPage)
 	
-	$("form").attr("method","POST").attr("action","/product/listProduct/").submit();
+	$("form").attr("method","POST").attr("action","/product/listProduct?menu=${param.menu}").submit();
 }
 	//document.getElementById("currentPage").value = currentPage;
    	//document.detailForm.submit();		
    	
-   	(function () {
+   	$(function () {
 		
    		$("td.ct_btn01:contains('검색')").on("click", function () {
 			
@@ -34,18 +34,28 @@ function fncGetUserList(currentPage) {
    			
    		});
 		
+   		
+   		//menu=manage 일때  ProductName "click" updateproduct
 		$(".ct_list_pop td:nth-child(3)").on("click" , function () {
+			
+			//alert( "index : "+$($("input[name=prodbyNo]")[$(".ct_list_pop td:nth-child(3)").index(this)]).val());
+			self.location="/product/updateProduct?menu=${param.menu}&prodNo="+$($("input[name=prodbyNo]")[$(".ct_list_pop td:nth-child(3)").index(this)]).val();
 		
-			self.location="/product/updateProduct?menu=${param.menu}&prodNo=${product.prodNo}"+$(this).text().trim();
 		});
 		
-		$(".ct_list_pop td:nth-child(3)").on("click", function () {
-			
-			self.location="/product/getProduct?menu=${param.menu}&prodNo=${product.prodNo}";
+   		
+   		//menu=search 일때 ProductName  "click" getproduct
+   		$(".ct_list_pop td:nth-child(3)").on("click", function () {
+   			
+   			//alert( "index : "+$($("input[name=prodbyNo]")[$(".ct_list_pop td:nth-child(3)").index(this)]).val());
+			self.location="/product/getProduct?menu=${param.menu}&prodNo="+$($("input[name=prodbyNo]")[$(".ct_list_pop td:nth-child(3)").index(this)]).val();
 			
 		});
-		
-
+		 
+   		
+   		
+   		
+		//productName 빨간색으로변경
 		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
 		$("h7").css("color" , "red");
 		
@@ -61,16 +71,14 @@ function fncGetUserList(currentPage) {
 
 	<div style="width: 98%; margin-left: 10px;">
 
-		<form name="detailForm" action="/product/listProduct/"
-			method="get">
+		<form name="detailForm"><!--  action="/product/listProduct/"
+			method="get" -->
 
 			<table width="100%" height="37" border="0" cellpadding="0"
 				cellspacing="0">
 				<tr>
-					<td width="15" height="37"><img src="/images/ct_ttl_img01.gif"
-						width="15" height="37" /></td>
-					<td background="/images/ct_ttl_img02.gif" width="100%"
-						style="padding-left: 10px;">
+					<td width="15" height="37"><img src="/images/ct_ttl_img01.gif" width="15" height="37" /></td>
+					<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left: 10px;">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td width="93%" class="ct_ttl01">
@@ -79,8 +87,8 @@ function fncGetUserList(currentPage) {
 							</tr>
 						</table>
 					</td>
-					<td width="12" height="37"><img src="/images/ct_ttl_img03.gif"
-						width="12" height="37" /></td>
+					<td width="12" height="37"><img src="/images/ct_ttl_img03.gif"width="12" height="37" />
+					</td>
 				</tr>
 			</table>
 
@@ -145,14 +153,12 @@ function fncGetUserList(currentPage) {
 					<td align="center">${ i }</td>
 					<td></td>
 					<td align="left">
-					<c:if  test="${param.menu eq 'manage'}" >
-					${product.prodName}
+					<input type="hidden" name="prodbyNo" value="${product.prodNo}"/>
+					<c:if  test="${param.menu eq 'manage'}" >${product.prodName}</c:if>
 					<%-- <a href="/product/updateProduct?menu=${param.menu}&prodNo=${product.prodNo}">${product.prodName}</a> --%>
-					</c:if>
-					<c:if test="${param.menu eq 'search'}">
-					${product.prodName}
-					<%-- <a href="/product/getProduct?menu=${param.menu}&prodNo=${product.prodNo}">${product.prodName}</a></td>
-					 --%></c:if>
+					
+					<c:if test="${param.menu eq 'search'}"> ${product.prodName}</c:if>
+					<%-- <a href="/product/getProduct?menu=${param.menu}&prodNo=${product.prodNo}">${product.prodName}</a></td> --%>
 					<td></td>
 					<td align="left">${product.price}</td>
 					<td></td>
@@ -166,7 +172,7 @@ function fncGetUserList(currentPage) {
 					<c:if test="${product.proTranCode.trim() == null && param.menu =='manage'}">판매중</c:if>
 					<c:if test="${product.proTranCode.trim() == '1' && user.role =='user'}">재고없음</c:if>
 					<c:if test="${product.proTranCode.trim() == '1' && user.role =='admin'}">구매완료
-					<!-- <a href="/updateTranCode.do?"> -->&nbsp;배송하기</a></c:if>
+					<a href="/updateTranCode.do?">&nbsp;배송하기</a></c:if>
 					<c:if test="${product.proTranCode.trim() =='2' && param.menu =='manage'}">배송중</c:if>
 					<c:if test="${product.proTranCode.trim() =='2' }">배송중</c:if>
 					<c:if test="${product.proTranCode.trim() =='3' }">배송완료</c:if>
