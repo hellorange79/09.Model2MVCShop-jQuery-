@@ -1,32 +1,31 @@
-<%--@page import="com.model2.mvc.service.product.vo.ProductVO"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.model2.mvc.service.domain.*"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 
-<%--
-	ProductVO productVO=(ProductVO)request.getAttribute("productVO");
-	
---%>
 <html>
 <head>
+<meta charset="EUC-KR">
 <title>상품정보수정</title>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 
-<script type="text/javascript" src="../javascript/calendar.js">
-</script>
-
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../javascript/calendar.js"></script>
 <script type="text/javascript">
 
 function fncUpdateProduct(){
 	//Form 유효성 검증
- 	var name = document.detailForm.prodName.value;
-	var detail = document.detailForm.prodDetail.value;
-	var manuDate = document.detailForm.manuDate.value;
-	var price = document.detailForm.price.value;
+ 	//var name = document.detailForm.prodName.value;
+	//var detail = document.detailForm.prodDetail.value;
+	//var manuDate = document.detailForm.manuDate.value;
+	//var price = document.detailForm.price.value;
 
+	var name = $("input[name='prodName']").val();
+	var detail = $("input[name='prodDetail']").val();
+	var manuDate = $("input[name='manuDate']").val();
+	var price = $("input[name= 'price']").val();
+	
 	if(name == null || name.length<1){
 		alert("상품명은 반드시 입력하여야 합니다.");
 		return;
@@ -44,13 +43,35 @@ function fncUpdateProduct(){
 		return;
 	}
 		
-	document.detailForm.action='/product/updateProduct';
-	document.detailForm.submit();
-}
-function resetData() {
-	document.detailForm.reset();
+	//document.detailForm.action='/product/updateProduct';
+	//document.detailForm.submit();
+	$("form").attr("method","POST").attr("action","/product/updateProduct").submit();
 }
 
+$(function() {
+	 $( "td.ct_btn01:contains('수정')" ).on("click" , function() {
+		
+		alert(  $( "td.ct_btn01:contains('수정')" ).html() );
+		fncUpdateProduct();
+	}); 
+	 
+});	
+
+
+$(function() {
+	 $( "td.ct_btn01:contains('취소')" ).on("click" , function() {
+		alert(  $( "td.ct_btn01:contains('취소')" ).html() );
+		history.go(-1);
+	});
+});
+
+
+/* function resetData() {
+	document.detailForm.reset();
+}
+ */
+ 
+ 
 </script>
 </head>
 
@@ -168,7 +189,7 @@ function resetData() {
 					</td>
 					
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
-						<a href="javascript:fncUpdateProduct();">수정</a>
+						수정<!-- <a href="javascript:fncUpdateProduct();">수정</a> -->
 					</td>
 					
 					<td width="14" height="23">
@@ -180,7 +201,7 @@ function resetData() {
 						<img src="/images/ct_btnbg01.gif"width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<a href="javascript:history.go(-1)">취소</a>
+						취소<!-- <a href="javascript:history.go(-1)">취소</a> -->
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>

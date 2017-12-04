@@ -134,7 +134,8 @@
 		<td align="right">
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td width="17" height="23"><img src="/images/ct_btnbg01.gif" width="17" height="23"></td>
+					<td width="17" height="23">
+					<img src="/images/ct_btnbg01.gif" width="17" height="23"></td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
 						<!-- ////////////////// jQuery Event 처리로 변경됨 ///////////////////////// 
 						<a href="/user/updateUser?userId=${user.userId}">수정</a>
